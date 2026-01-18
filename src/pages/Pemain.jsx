@@ -16,7 +16,7 @@ const Pemain = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPemain, setSelectedPemain] = useState(null); // Jika null = Add, jika ada isi = Edit
   const [formData, setFormData] = useState({
-    nama: '', posisi: 'Penyerang', tanggal_lahir: '', minutes_play: 0, foto: null
+    nama: '', posisi: 'Penyerang', tanggal_lahir: '', minutes_play: 0, foto: null, tempat_lahir: '',  asal_sekolah: '', alamat: '',
   });
 
  const fetchPemain = async (page = 1, search = '') => {
@@ -72,6 +72,9 @@ const handleSubmit = async (e) => {
     data.append('posisi', formData.posisi);
     data.append('tanggal_lahir', formData.tanggal_lahir);
     data.append('minutes_play', formData.minutes_play);
+    data.append('tempat_lahir', formData.tempat_lahir); 
+    data.append('asal_sekolah', formData.asal_sekolah); 
+    data.append('alamat', formData.alamat);
     if (formData.foto) data.append('foto_url', formData.foto);
 
     const isDark = document.documentElement.classList.contains('dark');
@@ -250,6 +253,32 @@ const handleDelete = async (id) => {
       />
     </div>
 
+    {/* Baris Baru: Tempat Lahir */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Tempat Lahir</label>
+        <input
+          type="text"
+          name="tempat_lahir"
+          value={formData.tempat_lahir}
+          onChange={(e) => setFormData({...formData, tempat_lahir: e.target.value})}
+          className="w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Contoh: Banyumas"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Asal Sekolah</label>
+        <input
+          type="text"
+          name="asal_sekolah"
+          value={formData.asal_sekolah}
+          onChange={(e) => setFormData({...formData, asal_sekolah: e.target.value})}
+          className="w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Contoh: SMPN 1 Pageralang"
+        />
+      </div>
+    </div>
+
     {/* 2. Input Tanggal Lahir (Sekarang di bawah Nama - Full Width) */}
     <div>
       <label className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 text-left block">Tanggal Lahir</label>
@@ -278,6 +307,8 @@ const handleDelete = async (id) => {
         </select>
       </div>
 
+     
+
       <div>
         <label className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 text-left block">Menit Main</label>
         <input 
@@ -291,6 +322,18 @@ const handleDelete = async (id) => {
 
     {/* 4. Foto Profil */}
     <div>
+      {/* Baris Baru: Alamat Lengkap */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
+        <textarea
+          name="alamat"
+          value={formData.alamat}
+         onChange={(e) => setFormData({...formData, alamat: e.target.value})}
+          rows="3"
+          className="w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Alamat lengkap rumah pemain..."
+        ></textarea>
+      </div>
   <label className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400 text-left block">Foto Profil</label>
   
   {/* AREA PREVIEW GAMBAR */}
@@ -311,6 +354,8 @@ const handleDelete = async (id) => {
     </span>
     <input type="file" className="hidden" onChange={handleFileChange} />
   </label>
+
+   
 </div>
 
     {/* 5. Submit Button dengan Loading State */}
