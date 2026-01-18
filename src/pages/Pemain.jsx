@@ -141,7 +141,10 @@ const handleFileChange = (e) => {
         </div>
       )
     },
+    {label:'Tempat Lahir', key: 'tempat_lahir'},
     {label:'Tanggal Lahir', key: 'tanggal_lahir'},
+    {label:'Alamat', key: 'alamat'},
+    {label:'Asal Sekolah', key: 'asal_sekolah'},
     { label: 'Posisi', key: 'posisi', className: 'dark:text-slate-400' },
     { label: 'Menit Main', render: (item) => <span className="font-mono font-bold text-blue-600 dark:text-blue-400">{item.minutes_play}'</span> },
     { 
